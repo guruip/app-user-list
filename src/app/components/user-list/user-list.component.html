@@ -1,0 +1,28 @@
+<div class="container">
+  <h2>Список пользователей</h2>
+
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="onSearchChange()"
+    placeholder="Фильтр по имени или email"
+  />
+
+  <div class="sort-buttons">
+    <button (click)="toggleSort('name')">
+      Sort by Name {{ getSortDirection('name') }}
+    </button>
+    <button (click)="toggleSort('email')">
+      Sort by Email {{ getSortDirection('email') }}
+    </button>
+  </div>
+
+  <div *ngIf="loading">Загрузка...</div>
+  <div *ngIf="error">{{ error }}</div>
+
+  <div *ngFor="let user of filteredUsers" class="user-card">
+    <h3>{{ user.name }}</h3>
+    <p>Email: {{ user.email }}</p>
+    <p>City: {{ user.address.city }}</p>
+  </div>
+</div>
